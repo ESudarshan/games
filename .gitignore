@@ -1,1 +1,4 @@
-snakes-and-ladders/.settings
+**/.settings
+**/.metadata
+.classpath
+.project
