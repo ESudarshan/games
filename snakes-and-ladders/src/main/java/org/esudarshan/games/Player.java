@@ -17,7 +17,7 @@ public class Player {
 	public Player(int id) {
 		super();
 		this.id = id + 1;
-		this.name = Integer.toString(id);
+		this.name = Integer.toString(id + 1);
 		this.location = 1;
 		this.path = new ArrayList<Integer>();
 		this.path.add(1);
@@ -46,6 +46,14 @@ public class Player {
 
 	public void setLocation(int location) {
 		this.location = location;
+	}
+
+	public List<Integer> getPath() {
+		return path;
+	}
+
+	public void setPath(List<Integer> path) {
+		this.path = path;
 	}
 
 	public int makeAMove(int offset, Board board) {

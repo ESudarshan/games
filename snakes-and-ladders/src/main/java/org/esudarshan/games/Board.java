@@ -3,14 +3,22 @@ package org.esudarshan.games;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Board {
 
 	private int[] array;
 	private Map<Integer, Integer> snakes;
 	private Map<Integer, Integer> ladders;
 
+	@Value("#{${snks}}")
+	Map<String, String> snks;
+
 	public Board() {
-		array = new int[99];
+		
+		array = new int[100];
 		snakes = new HashMap<Integer, Integer>();
 		snakes.put(17, 7);
 		snakes.put(64, 60);

@@ -1,18 +1,32 @@
 package org.esudarshan.games;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@EnableAutoConfiguration
+@ComponentScan(basePackages = { "org.esudarshan" })
 public class SnakesNLadders {
 
+	@Autowired
 	private Board board;
-	private Player[] players;
+
+	@Autowired
 	private Dice dice;
 
-	public SnakesNLadders(int noOfPlayers) {
-		board = new Board();
-		players = new Player[noOfPlayers];
-		for (int i = 0; i < players.length; i++) {
-			players[i] = new Player(i);
-		}
-		dice = new Dice();
+	@Autowired
+	private SnakesNLadders snakesNLadders;
+
+	private Player[] players;
+
+	public SnakesNLadders() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Board getBoard() {
@@ -39,13 +53,24 @@ public class SnakesNLadders {
 		this.dice = dice;
 	}
 
+	public void initializePlayers(int noOfPlayers) {
+		players = new Player[noOfPlayers];
+		for (int i = 0; i < players.length; i++) {
+			players[i] = new Player(i);
+		}
+	}
+
 	public static void main(String[] args) {
-		SnakesNLadders snakesNLadders = new SnakesNLadders(2);
-		Board board = snakesNLadders.getBoard();
-		Dice dice = snakesNLadders.getDice();
+		SpringApplication.run(SnakesNLadders.class, args);
+	}
+
+	@CrossOrigin
+	@RequestMapping("/snakes-n-ladders/play/{noOfPlayers}")
+	public Player[] play(@PathVariable int noOfPlayers) {
+		snakesNLadders.initializePlayers(noOfPlayers);
 		Player winner = null;
 		while (true) {
-			for (Player player : snakesNLadders.getPlayers()) {
+			for (Player player : players) {
 				int location = player.getLocation();
 				int offset = dice.rollTheDice();
 				while (offset == 6) {
@@ -70,6 +95,14 @@ public class SnakesNLadders {
 			}
 		}
 		System.out.println("winner = " + winner);
+		return players;
+	}
+
+	@CrossOrigin
+	@RequestMapping("/snakes-n-ladders/get-board")
+	public Board getGameBoard() {
+		System.out.println(board);
+		return board;
 	}
 
 }
