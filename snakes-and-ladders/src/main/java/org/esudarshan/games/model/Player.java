@@ -1,4 +1,4 @@
-package org.esudarshan.games;
+package org.esudarshan.games.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.esudarshan.games;
+package org.esudarshan.games.model;
 
 import org.springframework.stereotype.Component;
 

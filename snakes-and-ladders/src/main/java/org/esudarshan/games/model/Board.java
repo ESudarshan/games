@@ -1,4 +1,4 @@
-package org.esudarshan.games;
+package org.esudarshan.games.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class Board {
 	Map<String, String> snks;
 
 	public Board() {
-		
+
 		array = new int[100];
 		snakes = new HashMap<Integer, Integer>();
 		snakes.put(17, 7);
