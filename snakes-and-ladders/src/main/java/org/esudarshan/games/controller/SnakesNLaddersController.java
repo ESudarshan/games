@@ -32,20 +32,29 @@ public class SnakesNLaddersController {
 	}
 
 	@CrossOrigin
-	@RequestMapping("/play")
-	public Player play() throws Exception {
+	@RequestMapping("/roll-dice")
+	public int rollTheDice() {
+		return snakesNLadders.getDice().rollTheDice();
+	}
+
+	@CrossOrigin
+	@RequestMapping("/play/{offset}")
+	public Player play(@PathVariable int offset) throws Exception {
 		Player[] players = snakesNLadders.getPlayers();
 		if (players == null) {
 			throw new Exception("Players not initialized");
 		}
-		Dice dice = snakesNLadders.getDice();
+		if (offset < 1 || offset > 6) {
+			throw new Exception("Invalid dice rolled");
+		}
+//		Dice dice = snakesNLadders.getDice();
 		Board board = snakesNLadders.getBoard();
 //		Player winner = null;
 //		while (true) {
 //			for (Player player : players) {
 		Player player = players[0];
-				int location = player.getLocation();
-				int offset = dice.rollTheDice();
+		int location = player.getLocation();
+//		int offset = dice.rollTheDice();
 //				while (offset == 6) {
 //					location = player.makeAMove(offset, board);
 //					if (location == 100) {
@@ -54,14 +63,14 @@ public class SnakesNLaddersController {
 //					}
 //					offset = dice.rollTheDice();
 //				}
-				if (location != 100) {
-					location = player.makeAMove(offset, board);
+		if (location != 100) {
+			location = player.makeAMove(offset, board);
 
-				}
-				if (location == 100) {
+		}
+		if (location == 100) {
 //					winner = player;
 //					break;
-				}
+		}
 //			}
 //			if (winner != null) {
 //				break;

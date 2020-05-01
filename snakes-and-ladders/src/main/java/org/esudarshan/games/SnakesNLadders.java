@@ -6,10 +6,12 @@ import org.esudarshan.games.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@EnableAutoConfiguration
-@ComponentScan(basePackages = { "org.esudarshan" })
+//@EnableAutoConfiguration
+//@ComponentScan(basePackages = { "org.esudarshan" })
+@SpringBootApplication(scanBasePackages = { "org.esudarshan" })
 public class SnakesNLadders {
 
 	@Autowired
